@@ -45,7 +45,7 @@ export default function Footer() {
               textAlign: { xs: 'center', sm: 'left' }
             }}
           >
-            © 2025 ERNI – All rights reserved.
+            © 2026 ERNI – All rights reserved.
           </Typography>
           <Box
             sx={{
