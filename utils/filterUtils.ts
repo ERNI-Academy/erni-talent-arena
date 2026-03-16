@@ -14,11 +14,11 @@ export interface Question {
 }
 
 export const questions: Question[] = [
-  { id: 1, text: "¿Tu caricatura tiene gafas?", feature: CaricatureFeatures.GLASSES },
-  { id: 2, text: "¿Tu caricatura tiene barba?", feature: CaricatureFeatures.BEARD },
-  { id: 3, text: "¿Tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
-  { id: 4, text: "¿Tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
-  { id: 5, text: "¿Eres un hombre?", feature: CaricatureFeatures.MAN },
+  { id: 1, text: "¿Alguien de tu caricatura tiene gafas?", feature: CaricatureFeatures.GLASSES },
+  { id: 2, text: "¿Alguien de tu caricatura tiene barba?", feature: CaricatureFeatures.BEARD },
+  { id: 3, text: "¿Alguien de tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
+  { id: 4, text: "¿Alguien de tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
+  { id: 5, text: "¿Sale algún hombre en la caricatura?", feature: CaricatureFeatures.MAN },
   { id: 6, text: "¿Salís más de una persona en la caricatura?", feature: CaricatureFeatures.GROUP },
   { id: 7, text: "¿Aparece una mascota en la caricatura?", feature: CaricatureFeatures.PET }
 ];
@@ -27,23 +27,12 @@ export const filterImagesBySequence = (images: CaricatureImage[], answers: boole
   const petQuestionIndex = questions.findIndex(
     (question) => question.feature === CaricatureFeatures.PET
   );
-  const groupQuestionIndex = questions.findIndex(
-    (question) => question.feature === CaricatureFeatures.GROUP
-  );
 
   // Si la pregunta de mascota es afirmativa, ignora el resto de respuestas y
   // filtra solo por la característica PET = 1.
   if (petQuestionIndex >= 0 && answers[petQuestionIndex] === true) {
     return images.filter(
       (image) => image.features[CaricatureFeatures.PET] === 1
-    );
-  }
-
-  // Si la pregunta de grupo es afirmativa, ignora el resto de respuestas y
-  // filtra solo por la característica GROUP = 1.
-  if (groupQuestionIndex >= 0 && answers[groupQuestionIndex] === true) {
-    return images.filter(
-      (image) => image.features[CaricatureFeatures.GROUP] === 1
     );
   }
 

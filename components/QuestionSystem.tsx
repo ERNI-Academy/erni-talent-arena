@@ -16,11 +16,11 @@ interface QuestionSystemProps {
 }
 
 const questions: Question[] = [
-  { id: 1, text: "¿Tu caricatura tiene gafas?", feature: CaricatureFeatures.GLASSES },
-  { id: 2, text: "¿Tu caricatura tiene barba?", feature: CaricatureFeatures.BEARD },
-  { id: 3, text: "¿Tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
-  { id: 4, text: "¿Tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
-  { id: 5, text: "¿Eres un hombre?", feature: CaricatureFeatures.MAN },
+  { id: 1, text: "¿Alguien de tu caricatura tiene gafas?", feature: CaricatureFeatures.GLASSES },
+  { id: 2, text: "¿Alguien de tu caricatura tiene barba?", feature: CaricatureFeatures.BEARD },
+  { id: 3, text: "¿Alguien de tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
+  { id: 4, text: "¿Alguien de tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
+  { id: 5, text: "¿Sale algún hombre en la caricatura?", feature: CaricatureFeatures.MAN },
   { id: 6, text: "¿Salís más de una persona en la caricatura?", feature: CaricatureFeatures.GROUP },
   { id: 7, text: "¿Aparece una mascota en la caricatura?", feature: CaricatureFeatures.PET }
 ];
