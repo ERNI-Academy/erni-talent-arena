@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Source_Sans_3 } from "next/font/google";
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
+import { ThemeProvider } from '@mui/material/styles';
 import { Analytics } from '@vercel/analytics/next';
+import theme from '../theme';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,7 +40,9 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-          {children}
+          <ThemeProvider theme={theme}>
+            {children}
+          </ThemeProvider>
         </AppRouterCacheProvider>
         <Analytics />
       </body>
