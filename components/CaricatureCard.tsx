@@ -33,6 +33,8 @@ export default function CaricatureCard({
   onOpenModal,
   onDownload
 }: CaricatureCardProps) {
+  const imageNumber = image.name.replace(/\.[^/.]+$/, '');
+
   return (
     <Card 
       sx={{ 
@@ -46,17 +48,36 @@ export default function CaricatureCard({
         }
       }}
     >
-      <CardMedia
-        component="img"
-        height="250"
-        image={image.src}
-        alt={image.name}
-        sx={{ 
-          objectFit: 'cover',
-          cursor: 'pointer'
-        }}
-        onClick={() => onOpenModal(image)}
-      />
+      <Box sx={{ position: 'relative' }}>
+        <CardMedia
+          component="img"
+          height="250"
+          image={image.src}
+          alt={image.name}
+          sx={{ 
+            objectFit: 'cover',
+            cursor: 'pointer'
+          }}
+          onClick={() => onOpenModal(image)}
+        />
+        <Typography
+          sx={{
+            position: 'absolute',
+            top: 8,
+            left: 8,
+            color: '#033778',
+            fontWeight: 700,
+            fontSize: '0.95rem',
+            lineHeight: 1,
+            backgroundColor: 'rgba(255, 255, 255, 0.88)',
+            borderRadius: 1,
+            px: 0.75,
+            py: 0.25
+          }}
+        >
+          {imageNumber}
+        </Typography>
+      </Box>
       <Box sx={{ p: 2, textAlign: 'center' }}>
         <CardActions sx={{ justifyContent: 'center', p: 0 }}>
           <IconButton 

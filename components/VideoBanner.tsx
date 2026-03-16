@@ -3,12 +3,13 @@ import React from 'react';
 export default function VideoBanner() {
   return (
     <div className="w-full h-[75vh] relative overflow-hidden">
-      <iframe
-        src="https://www.youtube.com/embed/pNh3RXKItQE?si=xmFGSl4ZHhwLmBhc&autoplay=1&mute=1&loop=1&playlist=pNh3RXKItQE"
-        className="w-full h-full border-0 absolute top-0 left-0 object-cover scale-[2.8] md:scale-[1.6] origin-center"
-        title="Video Banner"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
+      <video
+        className="w-full h-full absolute top-0 left-0 object-cover"
+        src="/erni_at_mwc.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
       />
       <div
         className="absolute top-0 left-0 w-full h-full pointer-events-auto z-[1]"

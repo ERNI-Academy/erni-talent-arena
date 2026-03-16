@@ -22,7 +22,6 @@ Juega a nuestro “Quién es Quién”, identifica tu caricatura entre la multit
         imageAlt="Team collaboration - Woman and man working together on laptop"
         imagePosition="right"
       />
-      <TestimonialsSection />
       <FooterBanner />
     </div>
   );
