@@ -12,7 +12,8 @@ const filterLabels = {
   [CaricatureFeatures.BEARD]: 'Beard',
   [CaricatureFeatures.LONG_AIR]: 'Long hair',
   [CaricatureFeatures.EARRINGS]: 'Earrings',
-  [CaricatureFeatures.MAN]: 'Man'
+  [CaricatureFeatures.MAN]: 'Man',
+  [CaricatureFeatures.GROUP]: 'Group'
 };
 
 export default function FilterButtons({ activeFilters, onFilterToggle }: FilterButtonsProps) {
