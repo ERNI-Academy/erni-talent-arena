@@ -21,7 +21,8 @@ const questions: Question[] = [
   { id: 3, text: "¿Tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
   { id: 4, text: "¿Tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
   { id: 5, text: "¿Eres un hombre?", feature: CaricatureFeatures.MAN },
-  { id: 6, text: "¿Salís más de una persona en la caricatura?", feature: CaricatureFeatures.GROUP }
+  { id: 6, text: "¿Salís más de una persona en la caricatura?", feature: CaricatureFeatures.GROUP },
+  { id: 7, text: "¿Aparece una mascota en la caricatura?", feature: CaricatureFeatures.PET }
 ];
 
 export default function QuestionSystem({ onFiltersChange }: QuestionSystemProps) {
