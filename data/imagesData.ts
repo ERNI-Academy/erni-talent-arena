@@ -8,10 +8,10 @@
 }
 
 export const caricaturesData = [
-  { file: "1.jpg", features: [0,0,0,0,0,0] },
-  { file: "3.jpg", features: [0,0,0,0,0,0] },
-  { file: "4.jpg", features: [0,0,0,0,0,0] },
-  { file: "5.jpg", features: [0,0,0,0,0,0] },
+  { file: "1.jpg", features: [0,0,0,0,1,0] },
+  { file: "3.jpg", features: [0,1,0,0,1,0] },
+  { file: "4.jpg", features: [0,1,0,0,1,0] },
+  { file: "5.jpg", features: [1,1,0,0,1,1] },
   { file: "6.jpg", features: [0,0,0,0,0,0] },
   { file: "7.jpg", features: [0,0,0,0,0,0] },
   { file: "8.jpg", features: [0,0,0,0,0,0] },
