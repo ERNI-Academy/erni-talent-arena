@@ -19,7 +19,7 @@
     "@react-three/fiber": "^9.2.0",
     "@types/three": "^0.178.1",
     "@vercel/analytics": "^1.5.0",
-    "next": "15.4.2",
+    "next": "^15.5.12",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "three": "^0.178.0"
