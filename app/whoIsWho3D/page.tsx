@@ -9,6 +9,7 @@ import { CaricatureFeatures } from '../../data/imagesData';
 import { filterImagesBySequence } from '../../utils/filterUtils';
 
 export default function WhoIsWho3DPage() {
+  const MAX_3D_IMAGES = 150;
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -50,7 +51,8 @@ export default function WhoIsWho3DPage() {
           <directionalLight position={[10, 10, 5]} intensity={1} />
           <pointLight position={[-10, -10, -5]} intensity={0.5} />
           
-          <WhoIsWhoBoard answers={answers} onCardClick={handleCardClick} />
+          <WhoIsWhoBoard answers={answers} onCardClick={handleCardClick} maxCards={MAX_3D_IMAGES} />
+          
           
           <OrbitControls 
             enablePan={false}

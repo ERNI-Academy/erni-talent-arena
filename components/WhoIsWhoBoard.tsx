@@ -11,11 +11,16 @@ import { filterImagesBySequence } from '../utils/filterUtils';
 interface WhoIsWhoBoardProps {
   answers: boolean[];
   onCardClick?: (caricature: { file: string; features: number[] }) => void;
+  maxCards?: number;
 }
 
-export default function WhoIsWhoBoard({ answers, onCardClick }: WhoIsWhoBoardProps) {
+export default function WhoIsWhoBoard({ answers, onCardClick, maxCards }: WhoIsWhoBoardProps) {
   const groupRef = useRef<THREE.Group>(null);
   const { camera, gl } = useThree();
+  const visibleCards = useMemo(
+    () => (typeof maxCards === 'number' ? caricaturesData.slice(0, maxCards) : caricaturesData),
+    [maxCards]
+  );
 
   // Manejador de clics global con raycasting
   const handleGlobalClick = (event: any) => {
@@ -41,7 +46,7 @@ export default function WhoIsWhoBoard({ answers, onCardClick }: WhoIsWhoBoardPro
             firstIntersection.object.parent : null;
         
         if (cardGroup && cardGroup.userData?.cardId) {
-          const cardData = caricaturesData.find(card => card.file === cardGroup.userData.cardId);
+          const cardData = visibleCards.find(card => card.file === cardGroup.userData.cardId);
           if (cardData) {
             onCardClick(cardData);
           }
@@ -53,11 +58,11 @@ export default function WhoIsWhoBoard({ answers, onCardClick }: WhoIsWhoBoardPro
   // Filtrar las caricaturas basándose en las respuestas
   const filteredCaricatures = useMemo(() => {
     if (answers.length === 0) {
-      return caricaturesData;
+      return visibleCards;
     }
 
     // Convertir caricaturesData al formato esperado por filterImagesBySequence
-    const images = caricaturesData.map(caricature => ({
+    const images = visibleCards.map(caricature => ({
       name: caricature.file.replace('.png', ''),
       src: `/caricatures/${caricature.file}`,
       size: 'Mediana',
@@ -67,15 +72,15 @@ export default function WhoIsWhoBoard({ answers, onCardClick }: WhoIsWhoBoardPro
     const filtered = filterImagesBySequence(images, answers);
     
     // Convertir de vuelta al formato de caricaturesData
-    return caricaturesData.filter(caricature => 
+    return visibleCards.filter(caricature => 
       filtered.some(img => img.name === caricature.file.replace('.png', ''))
     );
-  }, [answers]);
+  }, [answers, visibleCards]);
 
   // Crear una matriz que ocupe todo el tablero de delante hacia atrás
   const boardLayout = useMemo(() => {
     const cardsPerRow = 8;
-    const totalCards = caricaturesData.length;
+    const totalCards = visibleCards.length;
     const totalRows = Math.ceil(totalCards / cardsPerRow);
     const layout = [];
     
@@ -90,7 +95,7 @@ export default function WhoIsWhoBoard({ answers, onCardClick }: WhoIsWhoBoardPro
       for (let col = 0; col < cardsPerRow; col++) {
         const index = row * cardsPerRow + col;
         if (index < totalCards) {
-          const caricature = caricaturesData[index];
+          const caricature = visibleCards[index];
           const isVisible = filteredCaricatures.some(fc => fc.file === caricature.file);
           rowCards.push({
             ...caricature,
@@ -107,7 +112,7 @@ export default function WhoIsWhoBoard({ answers, onCardClick }: WhoIsWhoBoardPro
     }
     
     return layout;
-  }, [filteredCaricatures]);
+  }, [filteredCaricatures, visibleCards]);
 
   return (
     <group ref={groupRef} onClick={handleGlobalClick}>
