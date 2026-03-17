@@ -7,9 +7,9 @@ import {
   IconButton 
 } from '@mui/material';
 import { 
-  ArrowBack, 
-  Cancel 
+  ArrowBack
 } from '@mui/icons-material';
+import {useTranslations} from 'next-intl';
 
 interface Question {
   id: number;
@@ -36,6 +36,8 @@ export default function QuestionModal({
   onPrevious,
   onCancel
 }: QuestionModalProps) {
+  const tCommon = useTranslations('common');
+
   return (
     <Modal
       open={open}
@@ -92,7 +94,7 @@ export default function QuestionModal({
               fontSize: '1.2rem'
             }}
           >
-            Pregunta {currentQuestionIndex + 1} de {totalQuestions}
+            {tCommon('questionOf', {current: currentQuestionIndex + 1, total: totalQuestions})}
           </Typography>
           
           <IconButton
@@ -103,7 +105,7 @@ export default function QuestionModal({
                 backgroundColor: 'rgba(255, 255, 255, 0.1)'
               }
             }}
-            aria-label="Cerrar"
+            aria-label={tCommon('close')}
           >
             {/* Icono de X sin círculo */}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -151,7 +153,7 @@ export default function QuestionModal({
                 lineHeight: 1.1 // Opcional: asegura que el texto no haga el botón más alto
               }}
             >
-              Sí
+              {tCommon('yes')}
             </Button>
             <Button
               variant="contained"
@@ -169,7 +171,7 @@ export default function QuestionModal({
                 lineHeight: 1.1 // Opcional: asegura que el texto no haga el botón más alto
               }}
             >
-              No
+              {tCommon('no')}
             </Button>
           </Box>
         </Box>

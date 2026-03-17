@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Typography, Container, IconButton } from '@mui/material';
 import { 
   YouTube, 
@@ -5,8 +7,11 @@ import {
   X 
 } from '@mui/icons-material';
 import InstagramIcon from './InstagramIcon';
+import {useTranslations} from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('footer');
+
   return (
     <Box
       component="footer"
@@ -45,7 +50,7 @@ export default function Footer() {
               textAlign: { xs: 'center', sm: 'left' }
             }}
           >
-            © 2026 ERNI – All rights reserved.
+            {t('rights')}
           </Typography>
           <Box
             sx={{
@@ -64,7 +69,7 @@ export default function Footer() {
                 mr: { xs: 0, sm: 1 }
               }}
             >
-              Síguenos en
+              {t('followUs')}
             </Typography>
             <Box
               sx={{

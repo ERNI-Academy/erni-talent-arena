@@ -2,30 +2,27 @@
 
 import { useState, useEffect } from 'react';
 import { Button, Box, Typography } from '@mui/material';
-import { CaricatureFeatures } from '../data/imagesData';
-import { filterImagesBySequence } from '../utils/filterUtils';
+import {createQuestionsFromTexts} from '../utils/filterUtils';
+import {useTranslations} from 'next-intl';
 
-interface Question {
-  id: number;
-  text: string;
-  feature: CaricatureFeatures;
-}
-
-interface QuestionSystemProps {
+type QuestionSystemProps = {
   onFiltersChange: (answers: boolean[]) => void;
-}
-
-const questions: Question[] = [
-  { id: 1, text: "¿Alguien de tu caricatura tiene gafas?", feature: CaricatureFeatures.GLASSES },
-  { id: 2, text: "¿Alguien de tu caricatura tiene barba?", feature: CaricatureFeatures.BEARD },
-  { id: 3, text: "¿Alguien de tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
-  { id: 4, text: "¿Alguien de tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
-  { id: 5, text: "¿Sale algún hombre en la caricatura?", feature: CaricatureFeatures.MAN },
-  { id: 6, text: "¿Salís más de una persona en la caricatura?", feature: CaricatureFeatures.GROUP },
-  { id: 7, text: "¿Aparece una mascota en la caricatura?", feature: CaricatureFeatures.PET }
-];
+};
 
 export default function QuestionSystem({ onFiltersChange }: QuestionSystemProps) {
+  const tCommon = useTranslations('common');
+  const tWho = useTranslations('whoIsWho');
+  const tQuestions = useTranslations('questions');
+  const questions = createQuestionsFromTexts([
+    tQuestions('q1'),
+    tQuestions('q2'),
+    tQuestions('q3'),
+    tQuestions('q4'),
+    tQuestions('q5'),
+    tQuestions('q6'),
+    tQuestions('q7')
+  ]);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<boolean[]>([]);
   const [isVisible, setIsVisible] = useState(true);
@@ -89,7 +86,7 @@ export default function QuestionSystem({ onFiltersChange }: QuestionSystemProps)
             fontFamily: 'var(--font-source-sans-pro), sans-serif'
           }}
         >
-          ¡Estos son tus posibles gemelos digitales!
+          {tWho('possibleTwins')}
         </Typography>
         <Button
           variant="contained"
@@ -109,7 +106,7 @@ export default function QuestionSystem({ onFiltersChange }: QuestionSystemProps)
             }
           }}
         >
-          Reiniciar
+          {tCommon('restart')}
         </Button>
       </Box>
     );
@@ -160,7 +157,7 @@ export default function QuestionSystem({ onFiltersChange }: QuestionSystemProps)
             lineHeight: 1.1
           }}
         >
-          Sí
+          {tCommon('yes')}
         </Button>
         <Button
           variant="contained"
@@ -178,7 +175,7 @@ export default function QuestionSystem({ onFiltersChange }: QuestionSystemProps)
             lineHeight: 1.1
           }}
         >
-          No
+          {tCommon('no')}
         </Button>
       </Box>
     </Box>

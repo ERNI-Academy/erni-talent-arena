@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { caricaturesData } from '../data/imagesData';
 import { CharacterCard } from './index';
 import { filterImagesBySequence } from '../utils/filterUtils';
+import {useTranslations} from 'next-intl';
 
 interface WhoIsWhoBoardProps {
   answers: boolean[];
@@ -15,6 +16,7 @@ interface WhoIsWhoBoardProps {
 }
 
 export default function WhoIsWhoBoard({ answers, onCardClick, maxCards }: WhoIsWhoBoardProps) {
+  const tWho = useTranslations('whoIsWho');
   const groupRef = useRef<THREE.Group>(null);
   const { camera, gl } = useThree();
   const visibleCards = useMemo(
@@ -177,7 +179,7 @@ export default function WhoIsWhoBoard({ answers, onCardClick, maxCards }: WhoIsW
         anchorX="center"
         anchorY="middle"
       >
-        GUESS WHO?
+        {tWho('title').toUpperCase()}
       </Text>
     </group>
   );

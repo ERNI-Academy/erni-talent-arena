@@ -1,6 +1,11 @@
 import React from 'react';
 
-export default function VideoBanner() {
+interface VideoBannerProps {
+  titleLine1: string;
+  titleLine2: string;
+}
+
+export default function VideoBanner({titleLine1, titleLine2}: VideoBannerProps) {
   return (
     <div className="w-full h-[75vh] relative overflow-hidden">
       <video
@@ -29,7 +34,7 @@ export default function VideoBanner() {
             fontWeight: 600
           }}
         >
-          ERNI<br />Ingeniería de Software Suiza
+          {titleLine1}<br />{titleLine2}
         </h1>
       </div>
     </div>

@@ -13,19 +13,26 @@ export interface Question {
   feature: CaricatureFeatures;
 }
 
-export const questions: Question[] = [
-  { id: 1, text: "¿Alguien de tu caricatura tiene gafas?", feature: CaricatureFeatures.GLASSES },
-  { id: 2, text: "¿Alguien de tu caricatura tiene barba?", feature: CaricatureFeatures.BEARD },
-  { id: 3, text: "¿Alguien de tu caricatura tiene el pelo largo?", feature: CaricatureFeatures.LONG_AIR },
-  { id: 4, text: "¿Alguien de tu caricatura tiene pendientes?", feature: CaricatureFeatures.EARRINGS },
-  { id: 5, text: "¿Sale algún hombre en la caricatura?", feature: CaricatureFeatures.MAN },
-  { id: 6, text: "¿Salís más de una persona en la caricatura?", feature: CaricatureFeatures.GROUP },
-  { id: 7, text: "¿Aparece una mascota en la caricatura?", feature: CaricatureFeatures.PET }
+export const questionFeatures: CaricatureFeatures[] = [
+  CaricatureFeatures.GLASSES,
+  CaricatureFeatures.BEARD,
+  CaricatureFeatures.LONG_AIR,
+  CaricatureFeatures.EARRINGS,
+  CaricatureFeatures.MAN,
+  CaricatureFeatures.GROUP,
+  CaricatureFeatures.PET
 ];
 
+export const createQuestionsFromTexts = (texts: string[]): Question[] =>
+  questionFeatures.map((feature, index) => ({
+    id: index + 1,
+    text: texts[index] ?? "",
+    feature
+  }));
+
 export const filterImagesBySequence = (images: CaricatureImage[], answers: boolean[]): CaricatureImage[] => {
-  const petQuestionIndex = questions.findIndex(
-    (question) => question.feature === CaricatureFeatures.PET
+  const petQuestionIndex = questionFeatures.findIndex(
+    (feature) => feature === CaricatureFeatures.PET
   );
 
   // Si la pregunta de mascota es afirmativa, ignora el resto de respuestas y
@@ -39,9 +46,8 @@ export const filterImagesBySequence = (images: CaricatureImage[], answers: boole
   return images.filter(image => {
     // Verificar que la imagen cumpla con cada respuesta según su feature real.
     for (let i = 0; i < answers.length; i++) {
-      const question = questions[i];
-      if (!question) continue;
-      const featureIndex = question.feature;
+      const featureIndex = questionFeatures[i];
+      if (featureIndex === undefined) continue;
       const expectedValue = answers[i] ? 1 : 0;
       if (image.features[featureIndex] !== expectedValue) {
         return false;

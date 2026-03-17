@@ -9,6 +9,7 @@ import {
   Close, 
   Download 
 } from '@mui/icons-material';
+import {useTranslations} from 'next-intl';
 
 interface ImageModalProps {
   open: boolean;
@@ -26,6 +27,8 @@ export default function ImageModal({
   onClose,
   onDownload
 }: ImageModalProps) {
+  const tCommon = useTranslations('common');
+
   return (
     <Modal
       open={open}
@@ -70,6 +73,7 @@ export default function ImageModal({
           
           <IconButton
             onClick={onClose}
+            aria-label={tCommon('close')}
             sx={{
               color: 'white',
               '&:hover': {
@@ -104,6 +108,7 @@ export default function ImageModal({
           <IconButton
             onClick={() => selectedImage && onDownload(selectedImage.src, selectedImage.name)}
             size="large"
+            aria-label={tCommon('download')}
             sx={{
               bgcolor: '#033778',
               color: 'white',

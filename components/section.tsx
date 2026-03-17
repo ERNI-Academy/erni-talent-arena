@@ -1,8 +1,8 @@
 'use client';
 
-import { secureHeapUsed } from 'crypto';
 import React, { useState, useEffect } from 'react';
 import { HtmlRenderer } from '@/utils/htmlRenderer';
+import {Link} from '@/i18n/navigation';
 
 // Hook para detectar si es un dispositivo móvil
 const useIsMobile = () => {
@@ -75,7 +75,7 @@ export default function Section({
       </div>
       
       <div className="flex flex-col sm:flex-row gap-4">
-        <a
+        <Link
           href={buttonLink}
           className="inline-block bg-[#033778] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#022a5e] transition-colors duration-300"
           style={{ 
@@ -84,10 +84,10 @@ export default function Section({
           }}
         >
           {buttonText}
-        </a>
+        </Link>
         
         {!isMobile && (
-          <a
+          <Link
             href="/whoIsWho3D"
             className="inline-block bg-[#033778] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-[#022a5e] transition-colors duration-300"
             style={{ 
@@ -96,7 +96,7 @@ export default function Section({
             }}
           >
             {secondaryButtonText}
-          </a>
+          </Link>
         )}
       </div>
     </div>

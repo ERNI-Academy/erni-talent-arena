@@ -1,7 +1,12 @@
+'use client';
+
 import { HtmlRenderer } from '@/utils/htmlRenderer';
 import React from 'react';
+import {useTranslations} from 'next-intl';
 
 export default function FooterBanner() {
+  const tJobs = useTranslations('jobs');
+
   return (
     <section className="relative w-full py-16 px-12 overflow-hidden h-[600px]">
       <div 
@@ -20,16 +25,15 @@ export default function FooterBanner() {
               className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight"
               style={{ fontFamily: 'var(--font-source-sans-pro), sans-serif' }}
             >
-              <HtmlRenderer text={`Desarrolla tu potencial<br />y conviértete en un ERNIan.`} />
+              <HtmlRenderer as="span" text={tJobs('title')} />
             </h1>
             
             <div className="space-y-6 lg:space-y-0">
-              <p 
+              <HtmlRenderer
+                as="p"
+                text={tJobs('description')}
                 className="hidden lg:block text-base md:text-lg lg:text-xl text-white leading-relaxed max-w-2xl"
-                style={{ fontFamily: 'var(--font-source-sans-pro), sans-serif' }}
-              >
-                <HtmlRenderer text={`Buscamos personas como tú, con ganas de crecer y que quieran formar<br />parte de proyectos retadores para llegar aún más lejos.`} />
-              </p>
+              />
             </div>
           </div>
           <div className="flex lg:flex lg:col-span-3 items-end justify-end">
@@ -40,7 +44,7 @@ export default function FooterBanner() {
               className="bg-white text-black px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors duration-300 shadow-lg flex items-center justify-center min-w-[280px] whitespace-nowrap"
               style={{ fontFamily: 'var(--font-source-sans-pro), sans-serif' }}
             >
-              <HtmlRenderer text={`Ver oportunidades disponibles →`} />
+              <HtmlRenderer as="span" text={tJobs('cta')} />
             </a>
           </div>
         </div>

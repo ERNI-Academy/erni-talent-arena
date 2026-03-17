@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { caricaturesData } from '@/data/imagesData';
-import { CaricatureImage, filterImagesBySequence, questions } from '@/utils/filterUtils';
+import { CaricatureImage, filterImagesBySequence, questionFeatures } from '@/utils/filterUtils';
 
 export const useCaricatureFilter = () => {
   const [images, setImages] = useState<CaricatureImage[]>([]);
@@ -41,7 +41,7 @@ export const useCaricatureFilter = () => {
       setFilteredImages(filtered);
       setIsFiltering(false);
       
-      if (currentQuestionIndex < questions.length - 1) {
+      if (currentQuestionIndex < questionFeatures.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
       } else {
         setQuestionModalOpen(false);

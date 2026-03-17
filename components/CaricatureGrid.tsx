@@ -1,6 +1,7 @@
 import { Box, Typography, Fade, Slide } from '@mui/material';
 import CaricatureCard from './CaricatureCard';
 import { CaricatureImage } from '@/utils/filterUtils';
+import {useTranslations} from 'next-intl';
 
 interface CaricatureGridProps {
   images: CaricatureImage[];
@@ -15,11 +16,13 @@ export default function CaricatureGrid({
   onOpenModal,
   onDownload
 }: CaricatureGridProps) {
+  const t = useTranslations('grid');
+
   if (images.length === 0 && !isFiltering) {
     return (
       <Box sx={{ textAlign: 'center', py: 8 }}>
         <Typography variant="h6" color="text.secondary">
-          No se encontraron caricaturas con esas características
+          {t('noneFound')}
         </Typography>
       </Box>
     );
@@ -29,7 +32,7 @@ export default function CaricatureGrid({
     return (
       <Box sx={{ textAlign: 'center', py: 8 }}>
         <Typography variant="h6" color="text.secondary">
-          Filtrando caricaturas...
+          {t('filtering')}
         </Typography>
       </Box>
     );
