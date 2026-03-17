@@ -17,6 +17,7 @@
     "@mui/material-nextjs": "^7.3.9",
     "@react-three/drei": "^10.5.2",
     "@react-three/fiber": "^9.2.0",
+    "@swc/helpers": "^0.5.19",
     "@types/three": "^0.178.1",
     "@vercel/analytics": "^1.5.0",
     "next": "^16.1.6",
@@ -31,6 +32,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "5.9.3"
   }
 }
