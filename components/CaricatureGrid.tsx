@@ -1,4 +1,5 @@
-import { Box, Typography, Fade, Slide } from '@mui/material';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Box, Typography, Fade, Slide, CircularProgress } from '@mui/material';
 import CaricatureCard from './CaricatureCard';
 import { CaricatureImage } from '@/utils/filterUtils';
 import {useTranslations} from 'next-intl';
@@ -10,6 +11,8 @@ interface CaricatureGridProps {
   onDownload: (imageSrc: string, imageName: string) => void;
 }
 
+const CHUNK_SIZE = 30;
+
 export default function CaricatureGrid({
   images,
   isFiltering,
@@ -17,6 +20,39 @@ export default function CaricatureGrid({
   onDownload
 }: CaricatureGridProps) {
   const t = useTranslations('grid');
+  const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setVisibleCount(CHUNK_SIZE);
+  }, [images]);
+
+  useEffect(() => {
+    const target = loadMoreRef.current;
+    if (!target || isFiltering) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting) {
+          setVisibleCount((prev) => Math.min(prev + CHUNK_SIZE, images.length));
+        }
+      },
+      {
+        root: null,
+        rootMargin: '200px',
+        threshold: 0.1
+      }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [images.length, isFiltering]);
+
+  const visibleImages = useMemo(
+    () => images.slice(0, Math.min(visibleCount, images.length)),
+    [images, visibleCount]
+  );
 
   if (images.length === 0 && !isFiltering) {
     return (
@@ -51,7 +87,7 @@ export default function CaricatureGrid({
       gap: 3,
       mt: 3
     }}>
-      {images.map((image, index) => (
+      {visibleImages.map((image, index) => (
         <Fade 
           key={image.name} 
           in={!isFiltering} 
@@ -76,6 +112,19 @@ export default function CaricatureGrid({
           </Slide>
         </Fade>
       ))}
+      {visibleCount < images.length && (
+        <Box
+          ref={loadMoreRef}
+          sx={{
+            gridColumn: '1 / -1',
+            display: 'flex',
+            justifyContent: 'center',
+            py: 2
+          }}
+        >
+          <CircularProgress size={28} />
+        </Box>
+      )}
     </Box>
   );
 } 

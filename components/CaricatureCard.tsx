@@ -54,6 +54,8 @@ export default function CaricatureCard({
           height="250"
           image={image.src}
           alt={image.name}
+          loading="lazy"
+          decoding="async"
           sx={{ 
             objectFit: 'cover',
             cursor: 'pointer'
